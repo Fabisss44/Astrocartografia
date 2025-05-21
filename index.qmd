@@ -1,6 +1,12 @@
 ---
-title: "Trabajo de Procesamiento de Datos: Astrocartografía"
+title: "Astrocartografía y Geografía"
+Autor: Fabiana Céspedes 
 format: html
+editor: visual
+execute: 
+  echo: false
+  warning: false
+  mmesage: false
 toc: true
 toc-depth: 2
 ---
@@ -61,15 +67,15 @@ astro_data <- tibble(
 ```
 
 # Gráfico 1: Distribución de planetas por continente
+
 ```{r}
-g1 <- ggplot(astro_data, aes(x = longitud, y = latitud, color = planeta, size = tipo_linea)) +
-  geom_point(alpha = 0.7) +
+g1 <- ggplot(astro_data, aes(x = longitud, y = latitud, color = planeta)) +
+  geom_point(alpha = 0.7, size = 3) +  # tamaño fijo
   labs(
     title = "Ubicación geográfica de líneas planetarias",
     x = "Longitud",
     y = "Latitud",
-    color = "Planeta",
-    size = "Tipo de línea"
+    color = "Planeta"
   ) +
   theme_minimal()
 
@@ -77,10 +83,12 @@ ggplotly(g1)
 ```
 
 
-# Gráfico 2:  Distribución de planetas por continente
-
+# Gráfico 2:  Tipos líneas por planeta
 
 ```{r}
+library(ggplot2)
+library(plotly)
+
 g2 <- ggplot(astro_data, aes(x = tipo_linea, fill = planeta)) +
   geom_bar(position = "stack", width = 0.6) +
   labs(
@@ -89,11 +97,11 @@ g2 <- ggplot(astro_data, aes(x = tipo_linea, fill = planeta)) +
     y = "Total",
     fill = "Planeta"
   ) +
-theme_minimal()
+  theme_minimal()
 
 ggplotly(g2)
-
 ```
+
 
 
 # Conclusión
